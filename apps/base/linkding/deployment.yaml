@@ -13,6 +13,10 @@ spec:
       labels:
         app: linkding
     spec:
+      securityContext:
+        fsGroup: 33 # www-data group ID
+        runAsUser: 33 # www-data user ID
+        runAsGroup: 33 # www-data group ID
       nodeSelector:
          node-role.kubernetes.io/worker: ""
       containers:
@@ -20,7 +24,9 @@ spec:
          image: sissbruecker/linkding:latest
          ports:
             - containerPort: 9090
-         
+
+         securityContext:
+           allowPrivilegeEscalation: false
          volumeMounts:
           - name: linkding-data
             mountPath: /etc/linkding/data
