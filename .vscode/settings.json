@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "kubernetes": "*.yaml",
+        "kubernetes://schema/v1%40configmap": "file:///c%3A/Users/antoi/kubernetes-cluster/apps/staging/linkding/cloudflare.yaml"
+    }
+}
