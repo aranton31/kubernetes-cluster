@@ -36,13 +36,13 @@ spec:
           periodSeconds: 10
         volumeMounts:
         - name: config
-          mountPath: /etc/cloudflared/config
+          mountPath: /home/aranton-master/.cloudflared/config
           readOnly: true
         # Each tunnel has an associated "credentials file" which authorizes machines
         # to run the tunnel. cloudflared will read this file from its local filesystem,
         # and it'll be stored in a k8s secret.
         - name: creds
-          mountPath: /etc/cloudflared/creds
+          mountPath: /home/aranton-master/.cloudflared/creds
           readOnly: true
       volumes:
         - name: creds
@@ -72,7 +72,7 @@ data:
     
     tunnel: ldpi
 
-    credentials-file: /etc/cloudflared/creds/credentials.json
+    credentials-file: /home/aranton-master/.cloudflared/4fc37be4-9757-4943-8576-de44845574d7.json
 
     # Serves the metrics server under /metrics and the readiness server under /ready
     metrics: 0.0.0.0:2000
