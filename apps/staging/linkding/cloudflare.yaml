@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared
-  replicas: 2 # You could also consider elastic scaling for this deployment
+  replicas: 4 # You could also consider elastic scaling for this deployment
   template:
     metadata:
       labels:
@@ -25,6 +25,12 @@ spec:
         - --config
         - /etc/cloudflared/config/config.yaml
         - run
+        env:
+          - name: TUNNEL_ORIGIN_CERT
+            valueFrom:
+              secretKeyRef:
+                name: tunnel-credentials  # Replace with your secret name
+                key: cert.pem
         livenessProbe:
           httpGet:
             # Cloudflared has a /ready endpoint which returns 200 if and only if
@@ -72,9 +78,9 @@ data:
     
     tunnel: ldpi
 
-    credentials-file: /home/aranton-master/.cloudflared/4fc37be4-9757-4943-8576-de44845574d7.json
+    credentials-file: ~/.cloudflared/4fc37be4-9757-4943-8576-de44845574d7.json
     originRequest:
-      originCert: /home/aranton-master/.cloudflared/cert.pem
+      originCert: ~/.cloudflared/cert.pem
 
     # Serves the metrics server under /metrics and the readiness server under /ready
     metrics: 0.0.0.0:2000
