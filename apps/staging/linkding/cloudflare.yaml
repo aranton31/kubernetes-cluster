@@ -45,6 +45,9 @@ spec:
         - name: creds
           mountPath: /etc/cloudflared/creds
           readOnly: true
+      env:
+      - name: TUNNEL_ORIGIN_CERT
+        value: "/etc/cloudflared/cert.pem"    
       volumes:
         - name: creds
           secret:
