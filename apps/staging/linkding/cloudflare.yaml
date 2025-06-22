@@ -76,8 +76,8 @@ data:
     # Name of the tunnel you want to run
     
     tunnel: bookmarks
-    origincert: /etc/cloudflared/cert.pem
-    credentials-file: /etc/cloudflared/288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
+    
+    credentials-file: ~/.cloudflared/288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
     
 
     # Serves the metrics server under /metrics and the readiness server under /ready
