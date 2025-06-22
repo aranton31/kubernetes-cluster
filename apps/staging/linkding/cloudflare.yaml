@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared
-  replicas: 4 # You could also consider elastic scaling for this deployment
+  replicas: 2 # You could also consider elastic scaling for this deployment
   template:
     metadata:
       labels:
@@ -33,7 +33,7 @@ spec:
             path: /ready
             port: 2000
           failureThreshold: 3
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 10
         volumeMounts:
         - name: config
@@ -45,18 +45,12 @@ spec:
         - name: creds
           mountPath: /etc/cloudflared/creds
           readOnly: true
-      env:
-      - name: TUNNEL_ORIGIN_CERT
-        value: "/etc/cloudflared/cert.pem"    
+         
       volumes:
         - name: creds
           secret:
             secretName: tunnel-credentials
-            items:
-             - key: 288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
-               path: 288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
-             - key: cert.pem
-               path: cert.pem
+            
 
       # Create a config.yaml file from the ConfigMap below.
         - name: config
