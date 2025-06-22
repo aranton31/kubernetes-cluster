@@ -76,9 +76,9 @@ data:
   config.yaml: |
     # Name of the tunnel you want to run
     
-    tunnel: ldpi
+    tunnel: bookmarks
 
-    credentials-file: ~/.cloudflared/4fc37be4-9757-4943-8576-de44845574d7.json
+    credentials-file: ~/.cloudflared/288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
     originRequest:
       originCert: ~/.cloudflared/cert.pem
 
@@ -87,7 +87,7 @@ data:
     no-autoupdate: true
 
     ingress:
-    - hostname: ldpi.aranton.me
+    - hostname: bookmarks.aranton.me
       service: http://linkding:9090
 
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
