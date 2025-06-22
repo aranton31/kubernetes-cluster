@@ -25,12 +25,7 @@ spec:
         - --config
         - /etc/cloudflared/config/config.yaml
         - run
-        env:
-          - name: TUNNEL_ORIGIN_CERT
-            valueFrom:
-              secretKeyRef:
-                name: tunnel-credentials  # Replace with your secret name
-                key: cert.pem
+        
         livenessProbe:
           httpGet:
             # Cloudflared has a /ready endpoint which returns 200 if and only if
@@ -54,6 +49,11 @@ spec:
         - name: creds
           secret:
             secretName: tunnel-credentials
+            items:
+             - key: 288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
+               path: 288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
+             - key: cert.pem
+               path: cert.pem
 
       # Create a config.yaml file from the ConfigMap below.
         - name: config
@@ -78,9 +78,8 @@ data:
     
     tunnel: bookmarks
 
-    credentials-file: ~/.cloudflared/288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
-    originRequest:
-      originCert: ~/.cloudflared/cert.pem
+    credentials-file: /etc/cloudflared/288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
+    
 
     # Serves the metrics server under /metrics and the readiness server under /ready
     metrics: 0.0.0.0:2000
@@ -89,6 +88,7 @@ data:
     ingress:
     - hostname: bookmarks.aranton.me
       service: http://linkding:9090
+    - service: http_status:404
 
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
     # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
