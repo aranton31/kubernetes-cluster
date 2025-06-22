@@ -77,7 +77,7 @@ data:
     
     tunnel: bookmarks
     
-    credentials-file: ~/.cloudflared/288b02bc-65db-4fe9-a4b5-f699bd82e3e6.json
+    credentials-file: /etc/cloudflared/creds/credentials.json
     
 
     # Serves the metrics server under /metrics and the readiness server under /ready
